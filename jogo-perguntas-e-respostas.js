@@ -7,7 +7,7 @@ const questions = [
   },
 
   {
-    category: "Geografia",
+    categor8y: "Geografia",
     question: "Qual é a capital do Brasil?",
     choices: ["São Paulo", "Brasília", "Rio de Janeiro"],
     answer: "Brasília"

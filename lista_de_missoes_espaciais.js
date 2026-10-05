@@ -37,10 +37,48 @@ for (let i = 0; i < remainingCrew.length; i++) {
 }
 
 function swapCrewMembers(crew, fromIndex, toIndex) {
-  if(fromIndex < 0 || fromIndex >= crew.length || toIndex < 0 || toIndex >= crew.length){
-    console.log("Invalid crew indices")
-    return
+  if (
+    fromIndex < 0 || 
+    toIndex < 0 ||
+    fromIndex >= crew.length ||
+    toIndex >= crew.length
+  ) {
+    console.log("Invalid crew indices");
+    return;
   }
 
-  updatedCrew[toIndex] = updatedCrew.splice(fromIndex, 1, updatedCrew[toIndex])[0]
+  const updatedCrew = crew.slice();
+  updatedCrew[fromIndex] = updatedCrew.splice(toIndex, 1, updatedCrew[fromIndex])[0];
+
+  return updatedCrew; 
+}
+
+const updatedSquad = swapCrewMembers(squad, 2, 5);
+
+function sortByPriorityDescending(crew) {
+  for (let i = 0; i < crew.length - 1; i++) {
+    for (let j = 0; j < crew.length - 1 - i; j++) {
+      if (crew[j].priority < crew[j + 1].priority) {
+        const temp = crew[j];
+        crew[j] = crew[j + 1];
+        crew[j + 1] = temp;
+      }
+    }
+  }
+}
+
+function getEVAReadyCrew(crew) {
+  const eligible = [];
+  for (const astronaut of crew) {
+    if (astronaut.isEVAEligible) eligible.push(astronaut);
+  }
+  sortByPriorityDescending(eligible); 
+  
+  return eligible;
+}
+
+
+const EVAReadySquad = getEVAReadyCrew(updatedSquad);
+for (let i = 0; i < EVAReadySquad.length; i++) {
+  console.log(EVAReadySquad[i].name);
 }

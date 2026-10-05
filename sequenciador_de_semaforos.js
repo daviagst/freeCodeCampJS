@@ -31,21 +31,44 @@ const config4 = {
 };
 
 const runSequence = (config, cycles) => {
-  if(config.phases === undefined){
-    console.log("No phases found")
-    return
-  }else if(config.fault === true){
-    console.log("Faulted phase!")
-    return
-  } 
-  else{
-    for(let i = 0; i < cycles; i++){
-      for(let j = 0; j < config.phases.length; j++){
-        console.log(config.phases[j])
+  if (config.phases.length === 0) {
+    console.log("No phases found");
+    return;
+  }
+
+  if (config.fault === true) {
+    console.log("Faulted phase!");
+    return;
+  }
+
+  for (let i = 0; i < cycles; i++) {
+    for (let j = 0; j < config.phases.length; j++) {
+      const phase = config.phases[j];
+
+      if (phase.duration <= 0) {
+        console.log("Invalid phase detected");
+      } else {
+        console.log(
+          `Switching to ${phase.color} for ${phase.duration} s`
+        );
       }
     }
   }
-}
+};
 
-runSequence(config1, 2)
 
+const generateTimeline = (config, cycles) => {
+  const time = [];
+  let totalTime = 0;
+
+  for (let i = 0; i < cycles; i++) {
+    for (let j = 0; j < config.phases.length; j++) {
+      totalTime += config.phases[j].duration;
+      time.push(totalTime);
+    }
+  }
+
+  return time;
+};
+runSequence(config1, 1)
+generateTimeline(config1, 2)

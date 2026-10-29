@@ -12,7 +12,7 @@ const getAverage = (arr) => {
 
 const getGrade = (pont) => {
     let nota = 0
-    if(pont > 100){
+    if(pont === 100){
        nota = "A+"
     }else if(pont > 90){
         nota = "A"
@@ -23,7 +23,7 @@ const getGrade = (pont) => {
     }else if(pont > 60){
         nota = "D"
     }else{
-        nota = "D"
+        nota = "F"
     }
     return nota
 }
@@ -38,10 +38,19 @@ const hasPassingGrade = (pont) => {
     }
 }
 
-const studentMsg = (arr) => {
-
+const studentMsg = (arr, aprovado) => {
+    if(aprovado){
+        return `Class average: ${arr[0]}. Your grade: ${arr[1]}. You passed the course.`
+    }else{
+        return `Class average: ${arr[0]}. Your grade: ${arr[1]}. You failed the course.`
+    }
 }
 
-const pontuacao = getAverage([92, 88, 12, 77, 57, 100, 67, 38, 97, 89])
+const pontuacao = getAverage([38, 99, 87, 100, 100, 100, 100, 100, 100, 100])
 const resultado = getGrade(pontuacao)
+console.log(resultado)
 const aprovado =  hasPassingGrade(resultado)
+console.log(aprovado)
+const aluno = [pontuacao, resultado]
+const msg = studentMsg(aluno, aprovado)
+console.log(msg)

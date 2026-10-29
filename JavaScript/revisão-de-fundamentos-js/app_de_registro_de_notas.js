@@ -1,28 +1,28 @@
 const getAverage = (arr) => {
-  let soma = 0
-  for(let i = 0; i < arr.length; i++){
-    soma += arr[i]
-  }
+    let soma = 0
+    for (let i = 0; i < arr.length; i++) {
+        soma += arr[i]
+    }
 
-  const pontMedia = soma/arr.length
+    const pontMedia = soma / arr.length
 
-  return pontMedia
+    return pontMedia
 }
 
 
 const getGrade = (pont) => {
     let nota = 0
-    if(pont === 100){
-       nota = "A+"
-    }else if(pont > 90){
+    if (pont === 100) {
+        nota = "A+"
+    } else if (pont >= 90) {
         nota = "A"
-    }else if(pont > 80){
+    } else if (pont >= 80) {
         nota = "B"
-    }else if(pont > 70){
+    } else if (pont >= 70) {
         nota = "C"
-    }else if(pont > 60){
+    } else if (pont >= 60) {
         nota = "D"
-    }else{
+    } else {
         nota = "F"
     }
     return nota
@@ -30,27 +30,17 @@ const getGrade = (pont) => {
 
 
 const hasPassingGrade = (pont) => {
-    let aprovado = false
-    if(pont === "A+" || pont === "A" || pont === "B" || pont === "C" || pont === "D"){
-        return aprovado = true
-    }else{
-        return aprovado
+    return getGrade(pont) !== "F"
+}
+
+const studentMsg = (totalScores, studentScore) => {
+    const average = getAverage(totalScores)
+    const grade = getGrade(studentScore)
+    if (hasPassingGrade(studentScore)) {
+        return `Class average: ${average}. Your grade: ${grade}. You passed the course.`;
+    } else {
+        return `Class average: ${average}. Your grade: ${grade}. You failed the course.`;
     }
 }
 
-const studentMsg = (arr, aprovado) => {
-    if(aprovado){
-        return `Class average: ${arr[0]}. Your grade: ${arr[1]}. You passed the course.`
-    }else{
-        return `Class average: ${arr[0]}. Your grade: ${arr[1]}. You failed the course.`
-    }
-}
-
-const pontuacao = getAverage([38, 99, 87, 100, 100, 100, 100, 100, 100, 100])
-const resultado = getGrade(pontuacao)
-console.log(resultado)
-const aprovado =  hasPassingGrade(resultado)
-console.log(aprovado)
-const aluno = [pontuacao, resultado]
-const msg = studentMsg(aluno, aprovado)
-console.log(msg)
+console.log(studentMsg([92, 88, 12, 77, 57, 100, 67, 38, 97, 89], 37))

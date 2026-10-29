@@ -31,7 +31,7 @@ const getGrade = (pont) => {
 
 const hasPassingGrade = (pont) => {
     let aprovado = false
-    if(pont === "A+" || pont === "A" || pont === "B"){
+    if(pont === "A+" || pont === "A" || pont === "B" || pont === "C" || pont === "D"){
         return aprovado = true
     }else{
         return aprovado
